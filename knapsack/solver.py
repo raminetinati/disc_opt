@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import numpy
 import math
 from collections import namedtuple
@@ -11,8 +12,7 @@ def solve_dyn_sparse(capacity, items):
     table = [sparse_arr.SparseArr(capacity)]
     for jj, item in enumerate(items, 1):
         table.append(table[-1].successor(item.weight, item.value))
-        print jj
-        print len(table[-1])
+
     res = str(table[-1][capacity]) + " 1" + "\n"
     index = capacity
     res_item = []
@@ -40,7 +40,6 @@ def solv_dyn_approx(capacity, items):
         approx = False
     table = numpy.zeros((capacity+1, len(items)+1), dtype=numpy.long)
     for jj, item in enumerate(items, 1):
-        print jj
         for ii in range(1, capacity+1):
             if ii < item.weight:
                 table[ii, jj] = table[ii, jj-1]
